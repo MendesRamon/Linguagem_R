@@ -35,7 +35,11 @@ prop.table(table(dados$Genero, dados$Grau_de_Instruçao))
 
 #filhos
 table(dados$N_Filhos)
-prop.table(table(dados$N_Filhos))
+analise_filhos <- prop.table(table(dados$N_Filhos))
+
+#analisando em percentual
+#sprintf("%.2f%%", analise_filhos * 100) 
+
 
 #Variáveis contínuas
 #Necessário criar categorias que correspondam a faixas de valores
@@ -46,8 +50,11 @@ range(dados$Salario) #retorna um vetor contendo o mínimo e o máximo de todos o
 #Passo 2 (opcional): avaliar a quantidade de categorias adequada (método Sturges)
 nclass.Sturges(dados$Salario)#Calcule o número de classes para um histograma
 
-#Passo 3: cria??o da tabela com as faixas
+#Passo 3: criação da tabela com as faixas de valores
 table(cut(dados$Salario, seq(0, 6, l=7)))
+
+#plotando em um histograma
+hist(dados$Salario, main="Histogram de Salários", xlab="Salário", ylab="Frequência",col="gray")
 
 summary(dados$Salario)
 summary(dados$N_Filhos)
@@ -63,3 +70,5 @@ tabela <- dados %>% group_by(Genero, Grau_de_Instruçao) %>%
             DP = sd(Salario),
             mediana = median(Salario))
 tabela
+
+
